@@ -1,0 +1,21 @@
+{
+  "name": "send_email",
+  "version": "1.0.0",
+  "description": "Lambda function for dispatching HMA notification emails",
+  "main": "index.js",
+  "scripts": {
+    "test": ":"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.100.0",
+    "dotenv": "^4.0.0",
+    "email-templates": "^2.7.1",
+    "handlebars": "^4.0.10"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0"
+  }
+}
