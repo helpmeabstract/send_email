@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- '6'
+deploy:
+  provider: lambda
+  function_name: $AWS_FUNCTION_NAME
+  region: us-east-1
+  role: $AWS_ROLE_ARN
+  runtime: nodejs6.10
+  handler_name: handler
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
