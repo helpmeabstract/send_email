@@ -11,7 +11,8 @@ var Validator = {
     },
     validateTemplateName: function (templateName) {
         if (typeof templateName === 'undefined') throw new Error("Template name is required");
-        if (!fs.existsSync(path.join(__dirname, 'templates', templateName))) throw new Error("Template name '" + templateName + "' not found");
+        var templatePath = path.join(__dirname, 'templates', templateName);
+        if (!fs.existsSync(templatePath)) throw new Error("Template name '" + templateName + "' not found at '" + templatePath);
     },
     validateTemplateData: function (templateData) {
         if (typeof templateData !== "object") throw new Error("Template data must be an object. Got: ", templateData);
