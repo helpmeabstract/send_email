@@ -11,12 +11,12 @@ function Email(recipient, templateName, templateData) {
     this.templateData['recipient'] = this.recipient;
 }
 
-Email.prototype.send = function send() {
+Email.prototype.send = function send(callback) {
     var recipient = this.recipient;
     var templateName = this.templateName;
     var templateData = this.templateData;
     (new EmailTemplate(path.join(__dirname, 'templates', templateName))).render(templateData, function (error, result) {
-        if (error) throw new Error(error);
+        if (error) return callback(error);
 
         var subject = {Data: result.subject};
         var body = "";
@@ -37,10 +37,9 @@ Email.prototype.send = function send() {
             Source: process.env.FROM_ADDRESS
         };
 
-        ses.sendEmail(payload, function (error, data) {
-            if (error) throw new Error(error);
-
-            console.log('[send_email] sent email successfully: ', payload, data);
+        ses.sendEmail(payload, function (error, result) {
+            if (error) return callback(error);
+            return callback(null, {payload: payload, result: result});
         });
     });
 };

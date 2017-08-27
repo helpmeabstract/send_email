@@ -24,11 +24,12 @@ var Validator = {
 };
 
 exports.handler = function (event, context) {
-
     try {
         Validator.validateEvent(event);
-        (new Email(event.recipient, event.templateName, event.templateData)).send();
-        context.succeed(event);
+        (new Email(event.recipient, event.templateName, event.templateData)).send(function (err, result) {
+            if (err) context.fail(err);
+            context.succeed(result);
+        });
     } catch (error) {
         context.fail(error);
     }
